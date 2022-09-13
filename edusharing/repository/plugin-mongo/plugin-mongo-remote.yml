@@ -1,0 +1,15 @@
+version: '3.7'
+
+services:
+
+  repository-mongo-primary:
+    image: "docker.edu-sharing.com/community/edu_sharing-community-repository-plugin-mongo-deploy-docker-build-mongo:maven-feature-ltiplatform-8.1-SNAPSHOT"
+
+  repository-mongo-secondary:
+    image: "docker.edu-sharing.com/community/edu_sharing-community-repository-plugin-mongo-deploy-docker-build-mongo:maven-feature-ltiplatform-8.1-SNAPSHOT"
+
+  repository-mongo-arbiter:
+    image: "docker.edu-sharing.com/community/edu_sharing-community-repository-plugin-mongo-deploy-docker-build-mongo:maven-feature-ltiplatform-8.1-SNAPSHOT"
+
+  repository-mongo-express:
+    image: "docker.edu-sharing.com/community/edu_sharing-community-repository-plugin-mongo-deploy-docker-build-mongo_express:maven-feature-ltiplatform-8.1-SNAPSHOT"

@@ -1,0 +1,10 @@
+version: '3.7'
+
+services:
+
+  cache:
+    image: "projects/community/edu_sharing-projects-community-deploy-docker-build-redis:maven-feature-ltiplatform-8.1-SNAPSHOT"
+    environment:
+      ALLOW_EMPTY_PASSWORD: "yes"
+    expose:
+      - 6379

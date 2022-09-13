@@ -1,0 +1,6 @@
+version: '3.7'
+
+services:
+
+  cache:
+    image: "docker.edu-sharing.com/projects/community/edu_sharing-projects-community-deploy-docker-build-redis:maven-feature-ltiplatform-8.1-SNAPSHOT"

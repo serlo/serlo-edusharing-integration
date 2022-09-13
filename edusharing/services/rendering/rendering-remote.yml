@@ -1,0 +1,12 @@
+version: '3.7'
+
+services:
+
+  services-rendering-database:
+    image: "docker.edu-sharing.com/projects/community/edu_sharing-projects-community-deploy-docker-build-postgresql:maven-feature-ltiplatform-8.1-SNAPSHOT"
+
+  services-rendering-service:
+    image: "docker.edu-sharing.com/projects/community/edu_sharing-projects-community-deploy-docker-services-rendering-build-service:maven-feature-ltiplatform-8.1-SNAPSHOT"
+
+  services-rendering-service-init:
+    image: "docker.edu-sharing.com/projects/community/edu_sharing-projects-community-deploy-docker-services-rendering-build-service:maven-feature-ltiplatform-8.1-SNAPSHOT"

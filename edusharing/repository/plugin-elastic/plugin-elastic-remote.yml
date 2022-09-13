@@ -1,0 +1,9 @@
+version: '3.7'
+
+services:
+
+  repository-search-elastic-index:
+    image: "docker.edu-sharing.com/community/edu_sharing-community-repository-plugin-elastic-deploy-docker-build-elasticsearch:maven-feature-ltiplatform-8.1-SNAPSHOT"
+
+  repository-search-elastic-tracker:
+    image: "docker.edu-sharing.com/community/edu_sharing-community-repository-plugin-elastic-deploy-docker-build-tracker:maven-feature-ltiplatform-8.1-SNAPSHOT"
