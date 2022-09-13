@@ -105,6 +105,8 @@ services:
     depends_on:
       - repository-database
       - repository-transform
+    extra_hosts:
+    - "host.docker.internal:host-gateway"
 
   repository-transform:
     image: "projects/community/edu_sharing-projects-community-deploy-docker-repository-build-transform:maven-feature-ltiplatform-8.1-SNAPSHOT"

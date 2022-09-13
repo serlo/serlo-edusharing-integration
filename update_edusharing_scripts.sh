@@ -16,6 +16,9 @@ if [ "$(file -b --mime-type "$ZIP_FILE")" == "application/zip" ]; then
   fi
 
   unzip -d "$TARGET_DIR" "$ZIP_FILE"
+
+  patch -i repository-common.yml.patch \
+        -u "$TARGET_DIR/repository/repository-common.yml"
 else
   error "$ZIP_URL does not belong to a ZIP file"
 fi
