@@ -1,0 +1,25 @@
+version: '3.1'
+
+services:
+  mongo:
+    image: mongo
+    ports:
+      - '27017:27017'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+
+  editor:
+    image: ghcr.io/serlo/ece-as-a-service:main
+    ports:
+      - '3000:3000'
+    environment:
+      PROVIDER_SECRET: LTIKEY
+      MONGODB_URL: mongodb://localhost/admin
+      MONGODB_USERNAME: root
+      MONGODB_PASSWORD: example
+      PLATFORM_URL: http://localhost:8100/edu-sharing
+      PLATFORM_CLIENT_ID: TYPbLDjmJ3GcYZb
+      PLATFORM_AUTHENTICATION_ENDPOINT: http://localhost:8100/edu-sharing/rest/ltiplatform/v13/auth
+      PLATFORM_ACCESSTOKEN_ENDPOINT: http://localhost:8100/edu-sharing/rest/ltiplatform/v13/token
+      PLATFORM_JWK_SET: http://localhost:8100/edu-sharing/rest/lti/v13/jwks
