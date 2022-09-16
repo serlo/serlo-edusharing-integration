@@ -1,4 +1,6 @@
 #!/bin/bash
+#
+# Updates the deploy scripts of edusharing.
 
 source utils.sh
 set -e
