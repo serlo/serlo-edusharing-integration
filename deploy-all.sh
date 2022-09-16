@@ -1,5 +1,5 @@
 #!/bin/bash
 
-(cd edusharing && ./deploy.sh start)
+./deploy-edusharing.sh
 
 docker-compose up -d
