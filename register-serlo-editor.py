@@ -15,8 +15,7 @@ def main():
     print(get_current_lti_tool_ids())
 
 def get_current_lti_tool_ids():
-    reponse = requests.get("http://repository.127.0.0.1.nip.io:8100/edu-sharing/rest/ltiplatform/v13/tools",
-                           auth=HTTPBasicAuth("admin", "admin")).json()
+    reponse = call_edusharing_api("/rest/ltiplatform/v13/tools").json()
 
     return [tool["appId"] for tool in reponse["tools"]]
 
@@ -40,10 +39,14 @@ def is_edusharing_up():
 
 def is_edusharing_running():
     try:
-        return requests.get("http://repository.127.0.0.1.nip.io:8100/edu-sharing/rest/_about",
-                            auth=HTTPBasicAuth("admin", "admin")).ok
+        return call_edusharing_api("/rest/_about").ok
     except:
         return False
+
+def call_edusharing_api(path):
+    url = "http://repository.127.0.0.1.nip.io:8100/edu-sharing" + path
+
+    return requests.get(url, auth=HTTPBasicAuth("admin", "admin"))
 
 def get_repository_service_id():
     return get_docker_container_id("repository-service")
