@@ -12,7 +12,13 @@ TIME_TO_WAIT_FOR_EDUSHARING=180
 
 def main():
     wait_until_edusharing_is_running()
-    print("running")
+    print(get_current_lti_tool_ids())
+
+def get_current_lti_tool_ids():
+    reponse = requests.get("http://repository.127.0.0.1.nip.io:8100/edu-sharing/rest/ltiplatform/v13/tools",
+                           auth=HTTPBasicAuth("admin", "admin")).json()
+
+    return [tool["appId"] for tool in reponse["tools"]]
 
 def wait_until_edusharing_is_running():
     timestamp_before_loop = time.time()
