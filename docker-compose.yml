@@ -13,6 +13,8 @@ services:
     image: ghcr.io/serlo/ece-as-a-service:main
     ports:
       - '3000:3000'
+    depends_on:
+      - mongodb
     environment:
       PROVIDER_SECRET: LTIKEY
       PROVIDER_URL: http://localhost:3000
