@@ -22,7 +22,16 @@ def main():
 
     assert len(tool_ids) == 1
 
+    add_ltitool_customcontent_option(tool_ids[0])
     print("Serlo Editor registered. ID: %s" % tool_ids[0])
+
+def add_ltitool_customcontent_option(tool_id):
+    properties_path = f"/admin/v1/applications/app-{tool_id}.properties.xml"
+    properties = call_edusharing_api(properties_path).json()
+
+    properties["ltitool_customcontent_option"] = "true"
+
+    call_edusharing_api(properties_path, json=properties, method="PUT")
 
 def register_new_serlo_editor():
     if not is_serlo_running():
