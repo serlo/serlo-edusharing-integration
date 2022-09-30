@@ -16,7 +16,11 @@ def main():
     for tool_id in get_current_lti_tool_ids():
         delete_lti_tool(tool_id)
 
-    print(get_current_lti_tool_ids())
+    register_serlo_editor()
+
+def register_serlo_editor():
+    if not is_serlo_running():
+        error("Serlo editor is not running")
 
 def delete_lti_tool(tool_id):
     call_edusharing_api("/admin/v1/applications/" + tool_id, method="DELETE")
@@ -43,6 +47,12 @@ def wait_until_edusharing_is_running():
 
 def is_edusharing_up():
     return get_repository_service_id() != ""
+
+def is_serlo_running():
+    try:
+        return requests.get("http://localhost:3000/").ok
+    except:
+        return False
 
 def is_edusharing_running():
     try:
