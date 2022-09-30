@@ -18,9 +18,33 @@ def main():
 
     register_serlo_editor()
 
+    tool_ids = get_current_lti_tool_ids()
+
+    assert len(tool_ids) == 1
+
+    print("Serlo Editor registered. ID: %s" % tool_ids[0])
+
 def register_serlo_editor():
     if not is_serlo_running():
         error("Serlo editor is not running")
+
+    call_edusharing_api("/ltiplatform/v13/manual-registration",
+                        method="POST",
+                        json={
+                          "toolName": "Serlo Editor",
+                          "toolUrl": "http://localhost:3000/lti",
+                          "toolDescription": "Serlo Editor",
+                          "keysetUrl": "http://host.docker.internal:3000/lti/keys",
+                          "loginInitiationUrl": "http://localhost:3000/lti/login",
+                          "redirectionUrls": [
+                            "http://localhost:3000/lti"
+                          ],
+                          "customParameters": [],
+                          "logoUrl": "https://de.serlo.org/_assets/apple-touch-icon.png",
+                          "targetLinkUri": "http://localhost:3000/lti",
+                          "targetLinkUriDeepLink": "http://localhost:3000/lti",
+                          "clientName": "Serlo Editor"
+                        })
 
 def delete_lti_tool(tool_id):
     call_edusharing_api("/admin/v1/applications/" + tool_id, method="DELETE")
@@ -60,10 +84,12 @@ def is_edusharing_running():
     except:
         return False
 
-def call_edusharing_api(path, method="GET"):
+def call_edusharing_api(path, method="GET", json=None):
     url = "http://repository.127.0.0.1.nip.io:8100/edu-sharing/rest" + path
+    additional_args = { "json": json } if json != None else {}
 
-    return requests.request(method, url, auth=HTTPBasicAuth("admin", "admin"))
+    return requests.request(method, url, auth=HTTPBasicAuth("admin", "admin"),
+                            **additional_args)
 
 def get_repository_service_id():
     return get_docker_container_id("repository-service")
