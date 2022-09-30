@@ -81,10 +81,10 @@ def is_serlo_running():
         return False
 
 def is_edusharing_running():
-    #try:
+    try:
         return call_edusharing_api("/_about").ok
-    #except:
-    #    return False
+    except:
+        return False
 
 def get_repository_service_id():
     return get_docker_container_id("repository-service")
