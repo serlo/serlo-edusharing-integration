@@ -1,7 +1,7 @@
 version: '3.1'
 
 services:
-  mongo:
+  mongodb:
     image: mongo
     ports:
       - '27017:27017'
@@ -18,7 +18,7 @@ services:
     environment:
       PROVIDER_SECRET: LTIKEY
       PROVIDER_URL: http://localhost:3000
-      MONGODB_URL: mongodb://localhost/admin
+      MONGODB_URL: mongodb://mongodb/admin
       MONGODB_USERNAME: root
       MONGODB_PASSWORD: example
 
