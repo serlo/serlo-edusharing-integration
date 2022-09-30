@@ -16,7 +16,7 @@ def main():
     for tool_id in get_current_lti_tool_ids():
         delete_lti_tool(tool_id)
 
-    register_serlo_editor()
+    register_new_serlo_editor()
 
     tool_ids = get_current_lti_tool_ids()
 
@@ -24,7 +24,7 @@ def main():
 
     print("Serlo Editor registered. ID: %s" % tool_ids[0])
 
-def register_serlo_editor():
+def register_new_serlo_editor():
     if not is_serlo_running():
         error("Serlo editor is not running")
 
