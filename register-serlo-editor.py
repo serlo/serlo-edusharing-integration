@@ -18,6 +18,8 @@ def main():
 
     tool_ids = get_current_lti_tool_ids()
 
+    print(tool_ids)
+
     assert len(tool_ids) == 1
 
     add_ltitool_customcontent_option(tool_ids[0])
@@ -32,10 +34,12 @@ def add_ltitool_customcontent_option(tool_id):
     call_edusharing_api(properties_path, json=properties, method="PUT")
 
 def register_new_serlo_editor():
+    wait_until_serlo_is_running()
+
     if not is_serlo_running():
         error("Serlo editor is not running")
 
-    call_edusharing_api("/ltiplatform/v13/manual-registration",
+    print(call_edusharing_api("/ltiplatform/v13/manual-registration",
                         method="POST",
                         json={
                           "toolName": "Serlo Editor",
@@ -51,7 +55,7 @@ def register_new_serlo_editor():
                           "targetLinkUri": "http://localhost:3000/lti",
                           "targetLinkUriDeepLink": "http://localhost:3000/lti",
                           "clientName": "Serlo Editor"
-                        })
+                        }))
 
 def delete_lti_tool(tool_id):
     call_edusharing_api("/admin/v1/applications/" + tool_id, method="DELETE")
@@ -67,7 +71,19 @@ def wait_until_edusharing_is_running():
             error("Docker container for edusharing is not up")
 
         if time.time() - timestamp_before_loop > TIME_TO_WAIT_FOR_EDUSHARING:
-            error("We waited too long")
+            error("We waited too long for edusharing")
+
+        time.sleep(1)
+
+def wait_until_serlo_is_running():
+    timestamp_before_loop = time.time()
+
+    while True:
+        if is_serlo_running():
+            break
+
+        if time.time() - timestamp_before_loop > TIME_TO_WAIT_FOR_EDUSHARING:
+            error("We waited too long for serlo editor")
 
         time.sleep(1)
 
