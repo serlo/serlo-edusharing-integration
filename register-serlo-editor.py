@@ -18,8 +18,6 @@ def main():
 
     tool_ids = get_current_lti_tool_ids()
 
-    print(tool_ids)
-
     assert len(tool_ids) == 1
 
     add_ltitool_customcontent_option(tool_ids[0])
