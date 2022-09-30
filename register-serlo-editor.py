@@ -37,23 +37,26 @@ def register_new_serlo_editor():
     if not is_serlo_running():
         error("Serlo editor is not running")
 
-    print(call_edusharing_api("/ltiplatform/v13/manual-registration",
-                        method="POST",
-                        json={
-                          "toolName": "Serlo Editor",
-                          "toolUrl": "http://localhost:3000/lti",
-                          "toolDescription": "Serlo Editor",
-                          "keysetUrl": "http://host.docker.internal:3000/lti/keys",
-                          "loginInitiationUrl": "http://localhost:3000/lti/login",
-                          "redirectionUrls": [
-                            "http://localhost:3000/lti"
-                          ],
-                          "customParameters": [],
-                          "logoUrl": "https://de.serlo.org/_assets/apple-touch-icon.png",
-                          "targetLinkUri": "http://localhost:3000/lti",
-                          "targetLinkUriDeepLink": "http://localhost:3000/lti",
-                          "clientName": "Serlo Editor"
-                        }))
+    response = call_edusharing_api(
+        "/ltiplatform/v13/manual-registration",
+        method="POST",
+        json={
+            "toolName": "Serlo Editor",
+            "toolUrl": "http://localhost:3000/lti",
+            "toolDescription": "Serlo Editor",
+            "keysetUrl": "http://host.docker.internal:3000/lti/keys",
+            "loginInitiationUrl": "http://localhost:3000/lti/login",
+            "redirectionUrls": [ "http://localhost:3000/lti" ],
+            "customParameters": [],
+            "logoUrl": "https://de.serlo.org/_assets/apple-touch-icon.png",
+            "targetLinkUri": "http://localhost:3000/lti",
+            "targetLinkUriDeepLink": "http://localhost:3000/lti",
+            "clientName": "Serlo Editor"
+        }
+    )
+
+    if not response.ok:
+        error(response.text)
 
 def delete_lti_tool(tool_id):
     call_edusharing_api("/admin/v1/applications/" + tool_id, method="DELETE")
