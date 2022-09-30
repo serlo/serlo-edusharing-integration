@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 
 import json
+import sys
+
 import requests
 
 BASE_NODE = "org/edu_sharing/edu_sharing-projects-community-deploy-docker-compose/maven-feature-ltiplatform-8.1-SNAPSHOT"
@@ -10,6 +12,8 @@ def main():
 
     current_artefact = [x for x in lti_artefacts
                         if x["type"] == "component"][-1]
+
+    print("Download: %s" % current_artefact["id"], file=sys.stderr)
 
     assets = list_artefacts(current_artefact["id"])
     zip_asset = next(x for x in assets if x["id"].endswith(".zip"))
