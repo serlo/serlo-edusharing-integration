@@ -12,7 +12,14 @@ TIME_TO_WAIT_FOR_EDUSHARING=180
 
 def main():
     wait_until_edusharing_is_running()
+
+    for tool_id in get_current_lti_tool_ids():
+        delete_lti_tool(tool_id)
+
     print(get_current_lti_tool_ids())
+
+def delete_lti_tool(tool_id):
+    call_edusharing_api("/rest/admin/v1/applications/" + tool_id, method="DELETE")
 
 def get_current_lti_tool_ids():
     reponse = call_edusharing_api("/rest/ltiplatform/v13/tools").json()
@@ -43,10 +50,10 @@ def is_edusharing_running():
     except:
         return False
 
-def call_edusharing_api(path):
+def call_edusharing_api(path, method="GET"):
     url = "http://repository.127.0.0.1.nip.io:8100/edu-sharing" + path
 
-    return requests.get(url, auth=HTTPBasicAuth("admin", "admin"))
+    return requests.request(method, url, auth=HTTPBasicAuth("admin", "admin"))
 
 def get_repository_service_id():
     return get_docker_container_id("repository-service")
