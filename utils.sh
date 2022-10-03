@@ -1,3 +1,7 @@
+function get_container_id {
+  docker ps -f "name=$1" -q
+}
+
 function info {
   echo "INFO: $@" 1>&2
 }
