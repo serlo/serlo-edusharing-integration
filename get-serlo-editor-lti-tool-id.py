@@ -4,4 +4,4 @@ from utils import get_current_lti_tool_ids
 
 tool_ids = get_current_lti_tool_ids()
 
-print(tool_ids[0] if len(tool_ids) > 0 else "foo")
+print(tool_ids[0][:-1] if len(tool_ids) > 0 else "foo")
