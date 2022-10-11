@@ -5,6 +5,14 @@ import requests
 
 from requests.auth import HTTPBasicAuth
 
+def get_current_editor_id():
+    tool_ids = get_current_lti_tool_ids()
+
+    assert len(tool_ids) == 1
+
+    # Remove deployment ID from the tool_id
+    return tool_ids[0][:-1]
+
 def get_current_lti_tool_ids():
     reponse = call_edusharing_api("/ltiplatform/v13/tools").json()
 

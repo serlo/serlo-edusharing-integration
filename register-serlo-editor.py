@@ -21,7 +21,8 @@ def main():
     assert len(tool_ids) == 1
 
     add_ltitool_customcontent_option(tool_ids[0])
-    print("Serlo Editor registered. ID: %s" % tool_ids[0])
+
+    print("Serlo Editor registered. ID: %s" % get_current_editor_id())
 
 def add_ltitool_customcontent_option(tool_id):
     properties_path = f"/admin/v1/applications/app-{tool_id}.properties.xml"
