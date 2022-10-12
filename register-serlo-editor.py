@@ -4,7 +4,8 @@ import time
 
 import requests
 
-from utils import error, get_docker_container_id, call_edusharing_api, get_current_lti_tool_ids
+from utils import error, get_docker_container_id, call_edusharing_api, \
+    get_current_lti_tool_ids, get_current_editor_id
 
 TIME_TO_WAIT_FOR_EDUSHARING=180
 
