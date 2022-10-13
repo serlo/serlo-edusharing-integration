@@ -1,4 +1,4 @@
 #!/bin/bash
 
-(cd edusharing && ./deploy.sh down)
+(cd edusharing && ./deploy.sh stop)
 docker-compose down
