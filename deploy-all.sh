@@ -3,6 +3,11 @@
 set -e
 source utils.sh
 
+if [ ! -f .env.plattform_id ]; then
+  info "Create .env.plattform_id"
+  echo "PLATFORM_CLIENT_ID=foo123456" > .env.plattform_id
+fi
+
 info "Deploy edusharing & serlo editor"
 ./docker-compose.sh pull && ./docker-compose.sh up -d
 
