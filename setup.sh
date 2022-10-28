@@ -36,9 +36,11 @@ function init {
     save_client_id_for_editor foo123456
   fi
 
-  if ! which python > /dev/null; then
-    error "Python need to be installed"
-  fi
+  for TOOL in python docker docker-compose curl; do
+    if ! which $TOOL > /dev/null; then
+      error "The tool '$TOOL' need to be installed accessable in \$PATH"
+    fi
+  done
 
   if ! python -c "import requests"; then
     error "The python package 'requests' needs to be installed. Run 'pip install -r requirements.txt'"
