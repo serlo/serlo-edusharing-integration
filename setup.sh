@@ -27,7 +27,7 @@ function init {
     save_client_id_for_editor foo123456
   fi
 
-  if ! which python; then
+  if ! which python > /dev/null; then
     error "Python need to be installed"
   fi
 
