@@ -16,7 +16,7 @@ function main {
 
   info "Update CLIENT ID in serlo editor"
   PLATFORM_CLIENT_ID="$(./get-serlo-editor-lti-tool-id.py)"
-  echo "PLATFORM_CLIENT_ID=$PLATFORM_CLIENT_ID" > .env.plattform_id
+  save_client_id_for_editor "$PLATFORM_CLIENT_ID"
   # Update the editor container since the environment variables changed
   ./docker-compose.sh up -d
 }
@@ -24,8 +24,12 @@ function main {
 function init {
   if [ ! -f .env.plattform_id ]; then
     info "Create .env.plattform_id"
-    echo "PLATFORM_CLIENT_ID=foo123456" > .env.plattform_id
+    save_client_id_for_editor foo123456
   fi
+}
+
+function save_client_id_for_editor {
+  echo "PLATFORM_CLIENT_ID=$1" > .env.plattform_id
 }
 
 main
