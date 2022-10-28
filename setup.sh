@@ -26,6 +26,10 @@ function init {
     info "Create .env.plattform_id"
     save_client_id_for_editor foo123456
   fi
+
+  if ! which python; then
+    error "Python need to be installed"
+  fi
 }
 
 function save_client_id_for_editor {
