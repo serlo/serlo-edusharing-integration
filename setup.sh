@@ -7,6 +7,7 @@ source utils.sh
 
 function setup {
   init
+  check_tools
 
   info "Deploy edusharing & serlo editor"
   ./docker-compose.sh pull && ./docker-compose.sh up -d
@@ -35,7 +36,9 @@ function init {
     info "Create .env.plattform_id"
     save_client_id_for_editor foo123456
   fi
+}
 
+function check_tools {
   for TOOL in python docker docker-compose curl; do
     if ! which $TOOL > /dev/null; then
       error "The tool '$TOOL' need to be installed accessable in \$PATH"
