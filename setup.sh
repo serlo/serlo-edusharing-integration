@@ -12,14 +12,16 @@ function setup {
   info "Deploy edusharing & serlo editor"
   ./docker-compose.sh pull && ./docker-compose.sh up -d
 
-  info "Wait for edusharing and register serlo editor"
-  ./register-serlo-editor.py
+  if [ $SETUP_PROFILE == "all"]; then
+    info "Wait for edusharing and register serlo editor"
+    ./register-serlo-editor.py
 
-  info "Update CLIENT ID in serlo editor"
-  PLATFORM_CLIENT_ID="$(./get-serlo-editor-lti-tool-id.py)"
-  save_client_id_for_editor "$PLATFORM_CLIENT_ID"
-  # Update the editor container since the environment variables changed
-  ./docker-compose.sh up -d
+    info "Update CLIENT ID in serlo editor"
+    PLATFORM_CLIENT_ID="$(./get-serlo-editor-lti-tool-id.py)"
+    save_client_id_for_editor "$PLATFORM_CLIENT_ID"
+    # Update the editor container since the environment variables changed
+    ./docker-compose.sh up -d
+  fi
 }
 
 function help {
