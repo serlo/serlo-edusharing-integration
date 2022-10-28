@@ -1,9 +1,10 @@
-With this repo you can setup edusharing and the Serlo editor to test the
-integration via LTI.
+With this repo you can deploy edu-sharing and the Serlo editor locally via
+docker. It includes also scripts which configure the integration of the Serlo
+editor into edu-sharing.
 
 ## Setup
 
-For executing the scripts you need the following installed:
+For executing the scripts the following tools need to be installed:
 
 - `python` with the library `requests` (e.g. run
   `pip install -r requirements.txt`)
