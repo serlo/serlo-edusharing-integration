@@ -8,8 +8,6 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
-    profiles:
-      - editor
 
   editor:
     image: ghcr.io/serlo/ece-as-a-service:main
@@ -22,5 +20,3 @@ services:
       - .env.plattform_id
     extra_hosts:
       - "host.docker.internal:host-gateway"
-    profiles:
-      - editor
