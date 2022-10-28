@@ -30,6 +30,10 @@ function init {
   if ! which python; then
     error "Python need to be installed"
   fi
+
+  if ! python -c "import requests"; then
+    error "The python package 'requests' needs to be installed. Run 'pip install -r requirements.txt'"
+  fi
 }
 
 function save_client_id_for_editor {
