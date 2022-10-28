@@ -6,10 +6,7 @@ set -o pipefail
 source utils.sh
 
 function main {
-  if [ ! -f .env.plattform_id ]; then
-    info "Create .env.plattform_id"
-    echo "PLATFORM_CLIENT_ID=foo123456" > .env.plattform_id
-  fi
+  init
 
   info "Deploy edusharing & serlo editor"
   ./docker-compose.sh pull && ./docker-compose.sh up -d
@@ -22,6 +19,13 @@ function main {
   echo "PLATFORM_CLIENT_ID=$PLATFORM_CLIENT_ID" > .env.plattform_id
   # Update the editor container since the environment variables changed
   ./docker-compose.sh up -d
+}
+
+function init {
+  if [ ! -f .env.plattform_id ]; then
+    info "Create .env.plattform_id"
+    echo "PLATFORM_CLIENT_ID=foo123456" > .env.plattform_id
+  fi
 }
 
 main
