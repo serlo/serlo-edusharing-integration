@@ -5,7 +5,7 @@ set -o pipefail
 
 source utils.sh
 
-function main {
+function setup {
   init
 
   info "Deploy edusharing & serlo editor"
@@ -19,6 +19,15 @@ function main {
   save_client_id_for_editor "$PLATFORM_CLIENT_ID"
   # Update the editor container since the environment variables changed
   ./docker-compose.sh up -d
+}
+
+function help {
+  echo """./setup.sh [COMMAND]
+
+Commands:
+  all        – Deploy edu-sharing and the serlo editor and configure both (default command)
+  edusharing – Deploy only edu-sharing (without configuring it)
+  serlo      – Deploy only the serlo editor (without configuring it)"""
 }
 
 function init {
@@ -40,4 +49,13 @@ function save_client_id_for_editor {
   echo "PLATFORM_CLIENT_ID=$1" > .env.plattform_id
 }
 
-main
+case "$1" in
+  "" | all)
+    SETUP_PROFILE=all setup;;
+  edusharing)
+    SETUP_PROFILE=edusharing setup;;
+  serlo)
+    SETUP_PROFILE=serlo setup;;
+  *)
+    help;;
+esac
