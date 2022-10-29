@@ -1,18 +1,13 @@
 #!/usr/bin/env python
 
-import time
-
 import requests
 
-from utils import error, get_docker_container_id, call_edusharing_api, \
-    get_current_lti_tool_ids, get_current_editor_id, info
-
-TIME_TO_WAIT_FOR_EDUSHARING=180
+from utils import error, call_edusharing_api, get_current_lti_tool_ids, \
+        get_current_editor_id, info
+from wait import wait_for_edusharing_and_serlo
 
 def main():
-    # TODO: Move to helper script
-    info("WAIT until edu-sharing is running"
-    wait_until_edusharing_is_running()
+    wait_for_edusharing_and_serlo()
 
     info("Delete all LTI tools in edu-sharing")
     delete_all_current_lti_tools()
@@ -40,11 +35,6 @@ def add_ltitool_customcontent_option(tool_id):
     call_edusharing_api(properties_path, json=properties, method="PUT")
 
 def register_new_serlo_editor():
-    wait_until_serlo_is_running()
-
-    if not is_serlo_running():
-        error("Serlo editor is not running")
-
     response = call_edusharing_api(
         "/ltiplatform/v13/manual-registration",
         method="POST",
@@ -68,51 +58,6 @@ def register_new_serlo_editor():
 
 def delete_lti_tool(tool_id):
     call_edusharing_api("/admin/v1/applications/" + tool_id, method="DELETE")
-
-def wait_until_edusharing_is_running():
-    timestamp_before_loop = time.time()
-
-    while True:
-        if is_edusharing_running():
-            break
-
-        if not is_edusharing_up():
-            error("Docker container for edusharing is not up")
-
-        if time.time() - timestamp_before_loop > TIME_TO_WAIT_FOR_EDUSHARING:
-            error("We waited too long for edusharing")
-
-        time.sleep(1)
-
-def wait_until_serlo_is_running():
-    timestamp_before_loop = time.time()
-
-    while True:
-        if is_serlo_running():
-            break
-
-        if time.time() - timestamp_before_loop > TIME_TO_WAIT_FOR_EDUSHARING:
-            error("We waited too long for serlo editor")
-
-        time.sleep(1)
-
-def is_edusharing_up():
-    return get_repository_service_id() != ""
-
-def is_serlo_running():
-    try:
-        return requests.get("http://localhost:3000/").ok
-    except:
-        return False
-
-def is_edusharing_running():
-    try:
-        return call_edusharing_api("/_about").ok
-    except:
-        return False
-
-def get_repository_service_id():
-    return get_docker_container_id("repository-service")
 
 if __name__ == "__main__":
     main()
