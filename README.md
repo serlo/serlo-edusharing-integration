@@ -91,6 +91,8 @@ edu-sharing. The following steps are necessary:
    needs to be set to `true`.
 3. Overwrite the cluster configuration with
    `angular.headers.X-Frame-Options: "allow-from http://localhost:3000"`
+4. Add property `allowed_authentication_types` with value `true` in
+   `homeApplication.properties.xml`.
 
 ### Configuration of serlo
 

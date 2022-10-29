@@ -25,6 +25,9 @@ def main():
     info("Update 'Cluster-Override'")
     update_cluster_override()
 
+    info("Set `allowed_authentication_methods` to `true`")
+    set_allowed_authentication_types()
+
 def delete_all_current_lti_tools():
     for tool_id in get_current_lti_tool_ids():
         delete_lti_tool(tool_id)
@@ -68,6 +71,14 @@ def update_cluster_override():
         method="PULL",
         data='angular.headers.X-Frame-Options: "allow-from http://localhost:3000"'
     )
+
+def set_allowed_authentication_types():
+    properties_path = f"/admin/v1/applications/homeApplication.properties.xml"
+    properties = call_edusharing_api(properties_path).json()
+
+    properties["allowed_authentication_types"] = "lti"
+
+    call_edusharing_api(properties_path, json=properties, method="PUT")
 
 if __name__ == "__main__":
     main()
