@@ -14,7 +14,7 @@ function setup {
 
   if [ $SETUP_PROFILE == "all"]; then
     info "Wait for edusharing and register serlo editor"
-    ./register-serlo-editor.py
+    ./configure-edusharing.py
 
     info "Update CLIENT ID in serlo editor"
     PLATFORM_CLIENT_ID="$(./get-serlo-editor-lti-tool-id.py)"

@@ -29,6 +29,9 @@ def get_docker_container_id(name):
     return subprocess.check_output(f"docker ps -q -f 'name={name}'",
                                    shell=True).decode().strip()
 
+def info(message):
+    print(f"INFO: {message}", file=sys.stderr)
+
 def error(message):
     print(f"ERROR: {message}", file=sys.stderr)
     sys.exit(1)

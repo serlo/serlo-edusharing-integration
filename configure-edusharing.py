@@ -5,25 +5,31 @@ import time
 import requests
 
 from utils import error, get_docker_container_id, call_edusharing_api, \
-    get_current_lti_tool_ids, get_current_editor_id
+    get_current_lti_tool_ids, get_current_editor_id, info
 
 TIME_TO_WAIT_FOR_EDUSHARING=180
 
 def main():
+    # TODO: Move to helper script
+    info("WAIT until edu-sharing is running"
     wait_until_edusharing_is_running()
 
-    for tool_id in get_current_lti_tool_ids():
-        delete_lti_tool(tool_id)
+    info("Delete all LTI tools in edu-sharing")
+    delete_all_current_lti_tools()
 
+    info("Register serlo editor")
     register_new_serlo_editor()
 
+    info("Set `ltitool_customcontent_option` to `true`")
     tool_ids = get_current_lti_tool_ids()
-
     assert len(tool_ids) == 1
-
     add_ltitool_customcontent_option(tool_ids[0])
 
     print("Serlo Editor registered. ID: %s" % get_current_editor_id())
+
+def delete_all_current_lti_tools():
+    for tool_id in get_current_lti_tool_ids():
+        delete_lti_tool(tool_id)
 
 def add_ltitool_customcontent_option(tool_id):
     properties_path = f"/admin/v1/applications/app-{tool_id}.properties.xml"
