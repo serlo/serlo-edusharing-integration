@@ -90,6 +90,15 @@ edu-sharing. The following steps are necessary:
 2. For the newly added serlo editor the option `ltitool_customcontent_option`
    needs to be set to `true`.
 
+### Configuration of serlo
+
+With the tool [`./configure-serlo.sh`](./configure-serlo.sh) the serlo editor
+can be configured. Note that this script needs to be run _after_ edu-sharing was
+configured (especially after the serlo tool was added). The configuration steps
+of this script are:
+
+1. Update `PLATFORM_CLIENT_ID` to the value which was given by edu-sharing.
+
 ## Helper scripts
 
 ### Other deployment scripts
