@@ -1,3 +1,5 @@
+#!/bin/bash
+
 function get_container_id {
   docker ps -f "name=$1" -q
 }
@@ -9,4 +11,8 @@ function info {
 function error {
   echo "ERROR: $@" 1>&2
   exit 1
+}
+
+function save_client_id_for_editor {
+  echo "PLATFORM_CLIENT_ID=$1" > .env.plattform_id
 }

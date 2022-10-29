@@ -17,10 +17,7 @@ function setup {
     ./configure-edusharing.py
 
     info "Update CLIENT ID in serlo editor"
-    PLATFORM_CLIENT_ID="$(./get-serlo-editor-lti-tool-id.py)"
-    save_client_id_for_editor "$PLATFORM_CLIENT_ID"
-    # Update the editor container since the environment variables changed
-    ./docker-compose.sh up -d
+    ./configure-serlo.sh
   fi
 }
 
@@ -50,10 +47,6 @@ function check_tools {
   if ! python -c "import requests"; then
     error "The python package 'requests' needs to be installed. Run 'pip install -r requirements.txt'"
   fi
-}
-
-function save_client_id_for_editor {
-  echo "PLATFORM_CLIENT_ID=$1" > .env.plattform_id
 }
 
 case "$1" in
