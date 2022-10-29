@@ -11,7 +11,7 @@ from utils import error, get_docker_container_id, call_edusharing_api, info
 TIME_TO_WAIT=180
 
 def wait_for_edusharing_and_serlo():
-    info("Wait until edu-sharing and serlo is running"
+    info("Wait until edu-sharing and serlo are running")
     timestamp_before_loop = time.time()
 
     while True:

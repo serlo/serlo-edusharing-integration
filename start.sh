@@ -12,11 +12,11 @@ function setup {
   info "Deploy edusharing & serlo editor"
   ./docker-compose.sh pull && ./docker-compose.sh up -d
 
-  if [ $SETUP_PROFILE == "all"]; then
-    info "Wait for edusharing and register serlo editor"
+  if [ $SETUP_PROFILE == "all" ]; then
+    info "Configure edu-sharing"
     ./configure-edusharing.py
 
-    info "Update CLIENT ID in serlo editor"
+    info "Configure the serlo editor"
     ./configure-serlo.sh
   fi
 }
