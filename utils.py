@@ -18,9 +18,14 @@ def get_current_lti_tool_ids():
 
     return [tool["appId"] for tool in reponse["tools"]]
 
-def call_edusharing_api(path, method="GET", json=None):
+def call_edusharing_api(path, method="GET", json=None, data=None):
     url = "http://repository.127.0.0.1.nip.io:8100/edu-sharing/rest" + path
-    additional_args = { "json": json } if json != None else {}
+    additional_args = {}
+
+    if json:
+        additional_args["json"] = json
+    if data:
+        additional_args["data"] = data
 
     return requests.request(method, url, auth=HTTPBasicAuth("admin", "admin"),
                             **additional_args)

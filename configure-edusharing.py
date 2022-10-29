@@ -20,7 +20,10 @@ def main():
     assert len(tool_ids) == 1
     add_ltitool_customcontent_option(tool_ids[0])
 
-    print("Serlo Editor registered. ID: %s" % get_current_editor_id())
+    info("Serlo Editor registered. ID: %s" % get_current_editor_id())
+
+    info("Update 'Cluster-Override'")
+    update_cluster_override()
 
 def delete_all_current_lti_tools():
     for tool_id in get_current_lti_tool_ids():
@@ -55,6 +58,13 @@ def register_new_serlo_editor():
 
     if not response.ok:
         error(response.text)
+
+def update_cluster_override():
+    call_edusharing_api(
+        "/admin/v1/configFile?filename=edu-sharing.override.conf&pathPrefix=CLUSTER",
+        method="PULL",
+        data='angular.headers.X-Frame-Options: "allow-from http://localhost:3000"'
+    )
 
 def delete_lti_tool(tool_id):
     call_edusharing_api("/admin/v1/applications/" + tool_id, method="DELETE")

@@ -89,6 +89,8 @@ edu-sharing. The following steps are necessary:
    delete any old registration of a serlo editor).
 2. For the newly added serlo editor the option `ltitool_customcontent_option`
    needs to be set to `true`.
+3. Overwrite the cluster configuration with
+   `angular.headers.X-Frame-Options: "allow-from http://localhost:3000"`
 
 ### Configuration of serlo
 
