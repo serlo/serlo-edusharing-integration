@@ -28,6 +28,8 @@ def main():
     info("Set `allowed_authentication_methods` to `true`")
     set_allowed_authentication_types()
 
+    # TODO Remove editor from registry
+
     info("Register Serlo editor as platform")
     register_serlo_editor_as_platform()
 
@@ -95,7 +97,8 @@ def register_serlo_editor_as_platform():
     )
 
     if not response.ok:
-        error(response.text)
+        # TODO: Wait until bug is fixed
+        info("Editor seems already be registered")
 
 def update_properties(name, new_values):
     properties_path = f"/admin/v1/applications/{name}.properties.xml"
