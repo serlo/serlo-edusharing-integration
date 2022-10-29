@@ -28,6 +28,9 @@ def main():
     info("Set `allowed_authentication_methods` to `true`")
     set_allowed_authentication_types()
 
+    info("Register Serlo editor as platform")
+    register_serlo_editor_as_platform()
+
 def delete_all_current_lti_tools():
     for tool_id in get_current_lti_tool_ids():
         delete_lti_tool(tool_id)
@@ -75,6 +78,24 @@ def set_allowed_authentication_types():
         "homeApplication",
         { "allowed_authentication_types": "lti" }
     )
+
+def register_serlo_editor_as_platform():
+    response = call_edusharing_api(
+        "/lti/v13/registration/static",
+        method="POST",
+        params={
+            "platformId": "http://localhost:3000/",
+            "cliend_id": "editor",
+            "deployment_id": "2",
+            "authentication_request_url": "http://localhost:3000/platform/login",
+            "keyset_url": "http://host.docker.internal:3000/platform/keys",
+            "key_id": "42",
+            "auth_token_url": "http://localhost:3000/platform/login"
+        }
+    )
+
+    if not response.ok:
+        error(response.text)
 
 def update_properties(name, new_values):
     properties_path = f"/admin/v1/applications/{name}.properties.xml"
