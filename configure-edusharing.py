@@ -58,12 +58,10 @@ def register_new_serlo_editor():
         error(response.text)
 
 def add_ltitool_customcontent_option(tool_id):
-    properties_path = f"/admin/v1/applications/app-{tool_id}.properties.xml"
-    properties = call_edusharing_api(properties_path).json()
-
-    properties["ltitool_customcontent_option"] = "true"
-
-    call_edusharing_api(properties_path, json=properties, method="PUT")
+    update_properties(
+        f"app-{tool_id}.properties.xml",
+        { "ltitool_customcontent_option": "true" }
+    )
 
 def update_cluster_override():
     call_edusharing_api(
@@ -73,10 +71,15 @@ def update_cluster_override():
     )
 
 def set_allowed_authentication_types():
-    properties_path = f"/admin/v1/applications/homeApplication.properties.xml"
-    properties = call_edusharing_api(properties_path).json()
+    update_properties(
+        "homeApplication",
+        { "allowed_authentication_types": "lti" }
+    )
 
-    properties["allowed_authentication_types"] = "lti"
+def update_properties(name, new_values):
+    properties_path = f"/admin/v1/applications/{name}.properties.xml"
+    properties = call_edusharing_api(properties_path).json()
+    properties |= new_values
 
     call_edusharing_api(properties_path, json=properties, method="PUT")
 
