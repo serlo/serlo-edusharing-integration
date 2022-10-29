@@ -11,13 +11,35 @@ For executing the scripts the following tools need to be installed:
 - `docker` and `docker-compose`
 - `bash` with the normal POSIX command line tools and `curl`
 
-## Deployment
+## Deployment via `./start.sh`
 
-### Start everything
+### Start serlo and edu-sharing
 
-With the script [`deploy-all.sh`](./deploy-all.sh) you can start edusharing as
-well as the serlo editor. After both components are set up the Serlo editor is
-also registered into edusharing.
+With [`./start.sh`](./start.sh) edu-sharing and the serlo editor are deployed
+and configured so that the integration can be tested:
+
+```bash
+./start.sh
+```
+
+### Start only serlo / edu-sharing
+
+`./start.sh` can also be used to only start edu-sharing / serlo:
+
+```bash
+# Start only edu-sharing
+./start.sh edusharing
+
+# Start only serlo
+./start.sh serlo
+```
+
+### Stop containers
+
+With [`./stop.sh`](./stop.sh) all containers can be stopped (it runs
+`./docker-compose.sh down`).
+
+## Helper scripts
 
 ### Other deployment scripts
 
