@@ -76,6 +76,20 @@ SETUP_PROFILE=serlo ./docker-compose.sh up -d
 ./docker-compose.sh ps
 ```
 
+## Configurations
+
+### Configuration of edu-sharing
+
+With the tool [`./configure-edusharing.py`](./configure-edusharing.py) the
+integration of the Serlo editor can be configured on a locally running
+edu-sharing. The following steps are necessary:
+
+1. Register the serlo editor via Swagger (endpoint
+   `/ltiplatform/v13/manual-registration`) or in the LTI admin panel (maybe
+   delete any old registration of a serlo editor).
+2. For the newly added serlo editor the option `ltitool_customcontent_option`
+   needs to be set to `true`.
+
 ## Helper scripts
 
 ### Other deployment scripts
