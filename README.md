@@ -39,7 +39,7 @@ and configured so that the integration can be tested:
 With [`./stop.sh`](./stop.sh) all containers can be stopped (it runs
 `./docker-compose.sh down`).
 
-## Behind the scenes
+## Behind the scenes (`./docker-compose.sh`)
 
 We use `docker-compose` to deploy edu-sharing / serlo. The script
 [`./docker-compose.sh`](./docker-compose.sh) is a wrapper around
@@ -61,6 +61,19 @@ SETUP_PROFILE=edusharing ./docker-compose.sh up -d
 
 # Starts only serlo
 SETUP_PROFILE=serlo ./docker-compose.sh up -d
+```
+
+### Useful commands
+
+```bash
+# Show logs of edu-sharing's repository-service
+./docker-compose.sh logs repository-service
+
+# Show logs of the serlo editor
+./docker-compose.sh logs editor
+
+# Show all deployed container
+./docker-compose.sh ps
 ```
 
 ## Helper scripts
