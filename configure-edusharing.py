@@ -29,13 +29,8 @@ def delete_all_current_lti_tools():
     for tool_id in get_current_lti_tool_ids():
         delete_lti_tool(tool_id)
 
-def add_ltitool_customcontent_option(tool_id):
-    properties_path = f"/admin/v1/applications/app-{tool_id}.properties.xml"
-    properties = call_edusharing_api(properties_path).json()
-
-    properties["ltitool_customcontent_option"] = "true"
-
-    call_edusharing_api(properties_path, json=properties, method="PUT")
+def delete_lti_tool(tool_id):
+    call_edusharing_api("/admin/v1/applications/" + tool_id, method="DELETE")
 
 def register_new_serlo_editor():
     response = call_edusharing_api(
@@ -59,15 +54,20 @@ def register_new_serlo_editor():
     if not response.ok:
         error(response.text)
 
+def add_ltitool_customcontent_option(tool_id):
+    properties_path = f"/admin/v1/applications/app-{tool_id}.properties.xml"
+    properties = call_edusharing_api(properties_path).json()
+
+    properties["ltitool_customcontent_option"] = "true"
+
+    call_edusharing_api(properties_path, json=properties, method="PUT")
+
 def update_cluster_override():
     call_edusharing_api(
         "/admin/v1/configFile?filename=edu-sharing.override.conf&pathPrefix=CLUSTER",
         method="PULL",
         data='angular.headers.X-Frame-Options: "allow-from http://localhost:3000"'
     )
-
-def delete_lti_tool(tool_id):
-    call_edusharing_api("/admin/v1/applications/" + tool_id, method="DELETE")
 
 if __name__ == "__main__":
     main()
