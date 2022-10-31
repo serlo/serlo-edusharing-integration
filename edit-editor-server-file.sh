@@ -3,7 +3,7 @@
 set -e
 source utils.sh
 
-CONTAINER_ID=$(get_container_id editor)
+CONTAINER_ID=$(./docker-compose.sh ps -q editor)
 
 if [ -z "$CONTAINER_ID" ]; then
   error "Serlo editor is not running"
