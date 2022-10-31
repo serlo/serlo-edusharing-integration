@@ -63,10 +63,8 @@ def register_new_serlo_editor():
         error(response.text)
 
 def add_ltitool_customcontent_option(tool_id):
-    update_properties(
-        f"app-{tool_id}.properties.xml",
-        { "ltitool_customcontent_option": "true" }
-    )
+    update_properties(f"app-{tool_id}",
+                      { "ltitool_customcontent_option": "true" })
 
 def update_cluster_override():
     call_edusharing_api(
