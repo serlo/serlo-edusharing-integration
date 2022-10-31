@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+import subprocess
+
 import requests
 
 from utils import error, call_edusharing_api, get_current_lti_tool_ids, \
@@ -28,7 +30,8 @@ def main():
     info("Set `allowed_authentication_methods` to `true`")
     set_allowed_authentication_types()
 
-    # TODO Remove editor from registry
+    info("Remove app-editor2.properties.xml")
+    remove_properties_file_of_editor()
 
     info("Register Serlo editor as platform")
     register_serlo_editor_as_platform()
@@ -78,6 +81,10 @@ def set_allowed_authentication_types():
         "homeApplication",
         { "allowed_authentication_types": "lti" }
     )
+
+def remove_properties_file_of_editor():
+    subprocess.run(["./docker-compose.sh", "exec", "repository-service", "rm", "-f",
+        "/usr/local/tomcat/shared/classes/config/cluster/applications/app-editor2.properties.xml"])
 
 def register_serlo_editor_as_platform():
     response = call_edusharing_api(

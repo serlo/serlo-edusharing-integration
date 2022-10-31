@@ -93,7 +93,8 @@ edu-sharing. The following steps are necessary:
    `angular.headers.X-Frame-Options: "allow-from http://localhost:3000"`
 4. Add property `allowed_authentication_types` with value `true` in
    `homeApplication.properties.xml`.
-5. Register the serlo editor as a platform via swagger (endpoint
+5. Remove `app-editor2.properties.xml` in the edu-sharing container.
+6. Register the serlo editor as a platform via swagger (endpoint
    `/lti/v13/registration/static`) or via the admin console.
 
 ### Configuration of serlo
