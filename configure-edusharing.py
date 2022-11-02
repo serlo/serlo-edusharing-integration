@@ -91,8 +91,8 @@ def register_serlo_editor_as_platform():
         "/lti/v13/registration/static",
         method="POST",
         params={
-            "platformId": "editor",
-            "cliend_id": "http://localhost:3000/",
+            "platformId": "http://localhost:3000/",
+            "client_id": "editor",
             "deployment_id": "2",
             "authentication_request_url": "http://localhost:3000/platform/login",
             "keyset_url": "http://host.docker.internal:3000/platform/keys",
