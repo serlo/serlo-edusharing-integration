@@ -111,16 +111,13 @@ of this script are:
 There are several helper scripts in the directory [`scripts`](./scripts),
 namely:
 
+- With the script
+  [`update-edusharing-scripts.sh`](./scripts/update-edusharing-scripts.sh) you
+  can update the deploy scripts of edusharing in the directory
+  [`edusharing`](./edusharing) to the latest version and apply changes needed
+  for the LTI setup on Linux.
 - [`show-repository-service-manifest.sh`](./scripts/show-repository-service-manifest.sh):
   Shows the deployed `MANIFEST.MF` of the repository service which contains the
   commit message.
 - [`edit-editor-server-file.sh`](./scripts/edit-editor-server-file.sh): Edits
   the `server.js` in the editor container which is useful in debugging.
-
-### Other deployment scripts
-
-- With the script
-  [`update-edusharing-scripts.sh`](./update-edusharing-scripts.sh) you can
-  update the deploy scripts of edusharing in the directory
-  [`edusharing`](./edusharing) to the latest version and apply changes needed
-  for the LTI setup on Linux.

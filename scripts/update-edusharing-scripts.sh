@@ -5,7 +5,7 @@
 source utils.sh
 set -e
 
-ZIP_URL=$(python get-current-edusharing-deploy-scripts.py)
+ZIP_URL=$(python scripts/get-current-edusharing-deploy-scripts.py)
 ZIP_FILE=$(tempfile --suffix .zip --prefix edusharing-deploy-scripts)
 TARGET_DIR=edusharing
 
