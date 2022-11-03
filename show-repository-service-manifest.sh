@@ -7,7 +7,7 @@ edu_sharing-community-repository-backend-services-core-\
 maven-feature-ltiplatform-8.1-SNAPSHOT.jar"
 
 docker cp \
-  "$(./get-repository-service-container-name.sh):$DOCKER_JAR_FILE" \
+  "$(./docker-compose.sh ps -q repository-service):$DOCKER_JAR_FILE" \
   "$LOCAL_JAR_FILE"
 
 unzip -p "$LOCAL_JAR_FILE" META-INF/MANIFEST.MF > "$LOCAL_MANIFEST_FILE"
