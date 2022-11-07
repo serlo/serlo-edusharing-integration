@@ -49,7 +49,7 @@ and configured so that the integration can be tested:
 With [`./stop.sh`](./stop.sh) all containers can be stopped (it runs
 `./docker-compose.sh down`).
 
-## Open edusharing
+### How to open edu-sharing after the deployment
 
 You can open edu-sharing under
 http://repository.127.0.0.1.nip.io:8100/edu-sharing/components/login. The
