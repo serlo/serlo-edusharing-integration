@@ -11,6 +11,16 @@ For executing the scripts the following tools need to be installed:
 - `docker` and `docker-compose`
 - `bash` with the normal POSIX command line tools and `curl`
 
+Edu-sharings runs on the domain `repository.127.0.0.1.nip.io:8100`. Make sure
+that this domains resolves to localhost (e.g.
+`host http://repository.127.0.0.1.nip.io:8100` should show `127.0.0.1` as a
+result). If it is not the case update `/etc/hosts` with the following lines:
+
+```
+127.0.0.1       repository.127.0.0.1.nip.io
+127.0.0.1       rendering.services.127.0.0.1.nip.io
+```
+
 ## Deployment via `./start.sh`
 
 ### Start serlo and edu-sharing
