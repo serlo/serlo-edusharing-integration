@@ -49,6 +49,12 @@ and configured so that the integration can be tested:
 With [`./stop.sh`](./stop.sh) all containers can be stopped (it runs
 `./docker-compose.sh down`).
 
+## Open edusharing
+
+You can open edu-sharing under
+http://repository.127.0.0.1.nip.io:8100/edu-sharing/components/login. The
+username and password is `admin`.
+
 ## Behind the scenes (`./docker-compose.sh`)
 
 We use `docker-compose` to deploy edu-sharing / serlo. The script
