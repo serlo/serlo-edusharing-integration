@@ -36,6 +36,9 @@ def main():
     info("Register Serlo editor as platform")
     register_serlo_editor_as_platform()
 
+    info("Erstelle einen Test-User")
+    register_test_user()
+
 def delete_all_current_lti_tools():
     for tool_id in get_current_lti_tool_ids():
         delete_lti_tool(tool_id)
@@ -104,6 +107,18 @@ def register_serlo_editor_as_platform():
     if not response.ok:
         # TODO: Wait until bug is fixed
         info("Editor seems already be registered")
+
+def register_test_user():
+    call_edusharing_api(
+        "/iam/v1/people/-home-/test/?password=test",
+        method = "POST",
+        json = {
+            "firstName": "test",
+            "lastName": "test",
+            "email": "test",
+            "sizeQuota": 104857600
+        }
+    )
 
 def update_properties(name, new_values):
     properties_path = f"/admin/v1/applications/{name}.properties.xml"
