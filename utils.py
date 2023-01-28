@@ -14,9 +14,10 @@ def get_current_editor_id():
     return tool_ids[0][:-1]
 
 def get_current_lti_tool_ids():
-    reponse = call_edusharing_api("/ltiplatform/v13/tools").json()
+    response = call_edusharing_api("/ltiplatform/v13/tools")
+    tools = response.json()["tools"] if response.text != "" else []
 
-    return [tool["appId"] for tool in reponse["tools"]]
+    return [tool["appId"] for tool in tools]
 
 def call_edusharing_api(path, method="GET", json=None, data=None, params=None):
     url = "http://repository.127.0.0.1.nip.io:8100/edu-sharing/rest" + path
