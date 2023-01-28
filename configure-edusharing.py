@@ -11,6 +11,9 @@ from wait import wait_for_edusharing_and_serlo
 def main():
     wait_for_edusharing_and_serlo()
 
+    info("Set `allowed_authentication_types` to `lti`")
+    set_allowed_authentication_types()
+
     info("Delete all LTI tools in edu-sharing")
     delete_all_current_lti_tools()
 
@@ -26,9 +29,6 @@ def main():
 
     info("Update 'Cluster-Override'")
     update_cluster_override()
-
-    info("Set `allowed_authentication_methods` to `true`")
-    set_allowed_authentication_types()
 
     info("Remove app-editor2.properties.xml")
     remove_properties_file_of_editor()
