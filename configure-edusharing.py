@@ -75,7 +75,7 @@ def add_ltitool_customcontent_option(tool_id):
 def update_cluster_override():
     call_edusharing_api(
         "/admin/v1/configFile?filename=edu-sharing.override.conf&pathPrefix=CLUSTER",
-        method="PULL",
+        method="PUT",
         data='angular.headers.X-Frame-Options: "allow-from http://localhost:3000"'
     )
 
