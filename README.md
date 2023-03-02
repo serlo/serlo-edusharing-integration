@@ -2,6 +2,9 @@ With this repo you can deploy edu-sharing and the Serlo editor locally via
 docker. It includes also scripts which configure the integration of the Serlo
 editor into edu-sharing.
 
+The serlo editor container is build by:
+https://github.com/serlo/ece-as-a-service
+
 ## Setup
 
 For executing the scripts the following tools need to be installed:
@@ -21,16 +24,28 @@ result). If it is not the case update `/etc/hosts` with the following lines:
 127.0.0.1       rendering.services.127.0.0.1.nip.io
 ```
 
-## Deployment via `./start.sh`
+## Run
 
-### Start serlo and edu-sharing
-
-With [`./start.sh`](./start.sh) edu-sharing and the serlo editor are deployed
-and configured so that the integration can be tested:
+With [`./start.sh`](./start.sh) edu-sharing and the serlo editor are pulled,
+deployed and configured.
 
 ```bash
 ./start.sh
 ```
+
+You can open edu-sharing under
+http://repository.127.0.0.1.nip.io:8100/edu-sharing/components/login. The
+username and password is `admin`.
+
+The serlo editor is pulled from: `https://github.com/serlo/ece-as-a-service/`
+(main branch)
+
+The edu-sharing container is pulled from `edu-sharing.com`.
+
+### Stop containers
+
+With [`./stop.sh`](./stop.sh) all containers can be stopped (it runs
+`./docker-compose.sh down`).
 
 ### Start only serlo / edu-sharing
 
@@ -44,16 +59,25 @@ and configured so that the integration can be tested:
 ./start.sh serlo
 ```
 
-### Stop containers
+### Connect edu-sharing container to a running development instance of the editor
 
-With [`./stop.sh`](./stop.sh) all containers can be stopped (it runs
-`./docker-compose.sh down`).
+This is useful if you do not want to use the editor docker container pulled from
+the repo but instead use a local running instance during development.
 
-### How to open edu-sharing after the deployment
+1. Run `yarn start:server` in your local editor repo. This wont terminate, open
+   a new console window.
+2. Run `./start.sh edusharing`in this repo to pull and deploy only the
+   edu-sharing container. This can take some time, wait until it is finished.
+3. Run `./configure-edusharing.py` in this repo to register the running editor
+   instance with the running edu-sharing container. This also can take some
+   time, wait until it is finished.
+4. Search for `INFO: Serlo Editor registered. ID: FTHmXJS0fSqXp4a` in the
+   console output of `./start.sh edusharing`. Copy the id into the editor repo
+   .env file under `EDITOR_CLIENT_ID_FOR_LAUNCH` and save. This should restart
+   the running instance of the editor.
 
-You can open edu-sharing under
-http://repository.127.0.0.1.nip.io:8100/edu-sharing/components/login. The
-username and password is `admin`.
+Now, the editor and edu-sharing are connected. Changes to the editor code will
+restart the editor instance without affecting the connection.
 
 ## Behind the scenes (`./docker-compose.sh`)
 
