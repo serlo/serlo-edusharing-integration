@@ -10,7 +10,7 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: example
 
   editor:
-    image: ghcr.io/serlo/ece-as-a-service:main
+    image: ghcr.io/serlo/serlo-editor-for-edusharing:main
     ports:
       - '3000:3000'
     depends_on:
