@@ -161,3 +161,9 @@ namely:
   commit message.
 - [`edit-editor-server-file.sh`](./scripts/edit-editor-server-file.sh): Edits
   the `server.js` in the editor container which is useful in debugging.
+
+## Troubleshooting
+
+### Error message "Die Kommunikation mit dem Remote-System konnte nicht verifiziert werden"
+
+Can be solved by removing the docker volumes. Stop (`docker stop [id]`) and remove (`docker rm [id]`) all containers and run `docker volume prune -a` to delete all volumes. Careful, this removes every docker volume on your system! Use the filter option if you have volumes that should not be removed. 
