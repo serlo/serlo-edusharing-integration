@@ -10,6 +10,7 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: example
 
   editor:
+    # Comment out next line and use `build: [serlo-editor-for-edusharing folder on your computer] to build and use a local docker image instead of fetching it from the remote. 
     image: ghcr.io/serlo/serlo-editor-for-edusharing:main
     ports:
       - '3000:3000'
