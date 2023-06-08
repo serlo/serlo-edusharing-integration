@@ -10,5 +10,5 @@ function error {
 }
 
 function save_client_id_for_editor {
-  echo "PLATFORM_CLIENT_ID=$1" > .env.plattform_id
+  echo "EDITOR_CLIENT_ID_FOR_LAUNCH=$1" > .env.plattform_id
 }

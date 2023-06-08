@@ -144,7 +144,7 @@ can be configured. Note that this script needs to be run _after_ edu-sharing was
 configured (especially after the serlo tool was added). The configuration steps
 of this script are:
 
-1. Update `PLATFORM_CLIENT_ID` to the value which was given by edu-sharing.
+1. Update `EDITOR_CLIENT_ID_FOR_LAUNCH` to the value which was given by edu-sharing.
 
 ## Helper scripts
 
